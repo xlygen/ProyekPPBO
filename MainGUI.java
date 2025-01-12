@@ -8,6 +8,12 @@ public class MainGUI {
     private static List<Pengunjung> pengunjungList = new ArrayList<>();
     private static List<Pemandu> pemanduList = new ArrayList<>();
     private static List<zonaWisata> zonaList = new ArrayList<>();
+    private static Fasilitas fasilitas = new Fasilitas() {
+        @Override
+        public String getLayanan() {
+            return "";
+        };
+
     public static void main(String[] args) {
         JFrame frame = new JFrame("Sistem Manajemen Taman Wisata");
         frame.setSize(400, 400);
@@ -24,8 +30,11 @@ public class MainGUI {
 
         JPanel panel = new JPanel();
         panel.add(tambahPengunjung);
+        panel.add(laporanPendapatan);
         panel.add(pemanduTersedia);
+        panel.add(Fasilitas);
         panel.add(zonaWisata);
+
         frame.add(label, "North");
         frame.add(panel, "Center");
 
@@ -52,6 +61,12 @@ public class MainGUI {
                     int id = Integer.parseInt(idStr);
                     int umur = Integer.parseInt(umurStr);
                     
+                    // Periksa apakah ID sudah ada
+                    if (fileManager.isIdExists(id)) {
+                        JOptionPane.showMessageDialog(frame, "ID sudah ada di sistem! Penambahan gagal.");
+                        return;
+                    }
+
                     // Pilihan tiket
                     String[] ticketOptions = {"Reguler", "Premium"};
                     String tipeTiket = (String) JOptionPane.showInputDialog(frame, "Pilih Tipe Tiket:",
@@ -66,8 +81,25 @@ public class MainGUI {
                     
                     Pengunjung pengunjung = new Pengunjung(id, nama, tiket, umur);
                     pengunjungList.add(pengunjung);
+                     //menyimpan file
+                     fileManager.saveVisitorData(pengunjung);
+                     // laporan pendapatan
+                     lpd.tambahPenjualan(tiket);
 
                     JOptionPane.showMessageDialog(frame, "Pengunjung berhasil ditambahkan.");
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(frame, "Input tidak valid!");
+                }
+            }
+        });
+        
+        //Laporan Pendapatan
+        laporanPendapatan.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    String laporan = lpd.tampilkanLaporan();
+                    JOptionPane.showMessageDialog(frame, laporan);
                 } catch (NumberFormatException ex) {
                     JOptionPane.showMessageDialog(frame, "Input tidak valid!");
                 }
@@ -86,6 +118,22 @@ public class MainGUI {
                             .append("\n");
                 }
                 JOptionPane.showMessageDialog(frame, pemanduInfo.toString());
+            }
+        });
+
+        //Fasilitas
+        Fasilitas.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                StringBuilder fasilitasInfo = new StringBuilder("Fasilitas:\n\n");
+
+                for (zonaWisata zona : zonaList) {
+                    fasilitasInfo.append("Nama Zona: ").append(zona.getNama()).append("\n")
+                            .append("Fasilitas: ").append(zona instanceof Fasilitas ? ((Fasilitas) zona).getLayanan() : "Tidak tersedia")
+                            .append("\n\n");
+                }
+
+                JOptionPane.showMessageDialog(frame, fasilitasInfo.toString());
             }
         });
 
