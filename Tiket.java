@@ -12,6 +12,6 @@ public class Tiket {
     }
 
     public int getHarga() {
-        return harga;
-    }
+        return harga;
+    }
 }
