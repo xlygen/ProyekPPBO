@@ -7,6 +7,7 @@ import java.util.List;
 public class MainGUI {
     private static List<Pengunjung> pengunjungList = new ArrayList<>();
     private static List<Pemandu> pemanduList = new ArrayList<>();
+    private static List<zonaWisata> zonaList = new ArrayList<>();
     public static void main(String[] args) {
         JFrame frame = new JFrame("Sistem Manajemen Taman Wisata");
         frame.setSize(400, 400);
@@ -24,7 +25,7 @@ public class MainGUI {
         JPanel panel = new JPanel();
         panel.add(tambahPengunjung);
         panel.add(pemanduTersedia);
-
+        panel.add(zonaWisata);
         frame.add(label, "North");
         frame.add(panel, "Center");
 
@@ -85,6 +86,22 @@ public class MainGUI {
                             .append("\n");
                 }
                 JOptionPane.showMessageDialog(frame, pemanduInfo.toString());
+            }
+        });
+
+        zonaWisata.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                StringBuilder zonaInfo = new StringBuilder("Informasi Zona Wisata:\n\n");
+
+                for (zonaWisata zona : zonaList) {
+                    zonaInfo.append("Nama Zona: ").append(zona.getNama()).append("\n")
+                            .append("Deskripsi: ").append(zona.getDeskripsi()).append("\n")
+                            .append("Operasional: ").append(zona.isOpeasional() ? "Buka" : "Tutup").append("\n")
+                            .append("Kapasitas Maksimal: ").append(zona.getJumlahKapasitas()).append("\n\n");
+                }
+
+                JOptionPane.showMessageDialog(frame, zonaInfo.toString());
             }
         });
         
