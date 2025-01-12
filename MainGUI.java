@@ -44,6 +44,12 @@ public class MainGUI {
         pemanduList.add(new Pemandu(335, "Rofiq", "Zona Kebun Binatang", "senin - Minggu"));
         pemanduList.add(new Pemandu(342, "Dimas", "Zona Air Terjun", "Sabtu - Minggu"));
 
+        // Menambahkan Zona List    
+        zonaList.add(new ZonaAdventure("Zona Adventure", "Tempat petualangan seru", true, 100));
+        zonaList.add(new ZonaTamanAnggrek("Zona Taman Anggrek", "Koleksi bunga anggrek indah", true, 50));
+        zonaList.add(new ZonaKebunBinatang("Zona Kebun Binatang", "Melihat hewan eksotis", true, 75));
+        zonaList.add(new ZonaAirTerjun("Zona Air Terjun", "Bermain Air", false, 30));
+
         tambahPengunjung.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
