@@ -7,13 +7,14 @@ import java.util.List;
 public class MainGUI {
     private static List<Pengunjung> pengunjungList = new ArrayList<>();
     private static List<Pemandu> pemanduList = new ArrayList<>();
+    private static LaporanPendapatan lpd = new LaporanPendapatan();
     private static List<zonaWisata> zonaList = new ArrayList<>();
     private static Fasilitas fasilitas = new Fasilitas() {
         @Override
         public String getLayanan() {
             return "";
-        };
-
+        }
+    };
     public static void main(String[] args) {
         JFrame frame = new JFrame("Sistem Manajemen Taman Wisata");
         frame.setSize(400, 400);
