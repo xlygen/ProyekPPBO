@@ -50,7 +50,19 @@ public class MainGUI {
 
                     int id = Integer.parseInt(idStr);
                     int umur = Integer.parseInt(umurStr);
+                    
+                    // Pilihan tiket
+                    String[] ticketOptions = {"Reguler", "Premium"};
+                    String tipeTiket = (String) JOptionPane.showInputDialog(frame, "Pilih Tipe Tiket:",
+                            "Tipe Tiket", JOptionPane.QUESTION_MESSAGE, null, ticketOptions, ticketOptions[0]);
 
+                    Tiket tiket;
+                    if ("Reguler".equalsIgnoreCase(tipeTiket)) {
+                        tiket = new tiketReguler();
+                    } else {
+                        tiket = new tiketPremium();
+                    }
+                    
                     Pengunjung pengunjung = new Pengunjung(id, nama, tiket, umur);
                     pengunjungList.add(pengunjung);
 
