@@ -85,6 +85,7 @@ public class MainGUI {
                     } else {
                         tiket = new tiketPremium();
                     }
+                    JOptionPane.showMessageDialog(frame, "Tiket " + tiket.getTipe() + " dipilih. Harga: Rp" + tiket.getHarga());
                     
                     Pengunjung pengunjung = new Pengunjung(id, nama, tiket, umur);
                     pengunjungList.add(pengunjung);
