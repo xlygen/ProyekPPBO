@@ -1,6 +1,3 @@
-import java.util.ArrayList;
-import java.util.List;
-
 public class Pengunjung extends User {
     private Tiket tiket;
     private int umur;
