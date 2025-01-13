@@ -88,6 +88,22 @@ public class MainGUI {
                     
                     Pengunjung pengunjung = new Pengunjung(id, nama, tiket, umur);
                     pengunjungList.add(pengunjung);
+
+                    // Pilih pemandu
+                    String[] pemanduNames = pemanduList.stream().map(Pemandu::getNama).toArray(String[]::new);
+                    String pemanduName = (String) JOptionPane.showInputDialog(frame, "Pilih Pemandu:",
+                            "Pemandu", JOptionPane.QUESTION_MESSAGE, null, pemanduNames, pemanduNames[0]);
+
+                    Pemandu selectedPemandu = pemanduList.stream()
+                            .filter(pemandu -> pemandu.getNama().equals(pemanduName))
+                            .findFirst()
+                            .orElse(null);
+
+                    if (selectedPemandu != null) {
+                        pengunjung.pilihPemandu(selectedPemandu);
+                        JOptionPane.showMessageDialog(frame, "Pengunjung berhasil ditambahkan ke pemandu: " + selectedPemandu.getNama());
+                    }
+
                      //menyimpan file
                      fileManager.saveVisitorData(pengunjung);
                      // laporan pendapatan
