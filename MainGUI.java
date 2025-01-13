@@ -102,10 +102,9 @@ public class MainGUI {
                     if (selectedPemandu != null) {
                         pengunjung.pilihPemandu(selectedPemandu);
                         JOptionPane.showMessageDialog(frame, "Pengunjung berhasil ditambahkan ke pemandu: " + selectedPemandu.getNama());
+                        //menyimpan file
+                        fileManager.saveVisitorData(pengunjung, selectedPemandu.getNama());
                     }
-
-                     //menyimpan file
-                     fileManager.saveVisitorData(pengunjung);
                      // laporan pendapatan
                      lpd.tambahPenjualan(tiket);
 

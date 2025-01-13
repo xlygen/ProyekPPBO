@@ -1,5 +1,4 @@
 import java.io.*;
-import java.util.*;
 
 public class fileManager {
 
@@ -17,12 +16,19 @@ public class fileManager {
         return false; // ID tidak ditemukan
     }
 
-    public static void saveVisitorData(Pengunjung pengunjung) {
+    // Metode untuk menyimpan data pengunjung ke file, termasuk pemandu yang dipilih
+    public static void saveVisitorData(Pengunjung pengunjung, String namaPemandu) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("dataPengunjung.txt", true))) {
-            writer.write("ID: " + pengunjung.getId() + ", Name: " + pengunjung.getNama() +
-                    ", Umur: " + pengunjung.getUmur() + ", Ticket: " + pengunjung.getTiket().getTipe());
-            writer.newLine();
-
+            // Format penyimpanan data pengunjung
+            writer.write("ID: " + pengunjung.getId());
+            writer.write(", Nama: " + pengunjung.getNama());
+            writer.write(", Umur: " + pengunjung.getUmur());
+            writer.write(", Tiket: " + pengunjung.getTiket().getTipe());
+            writer.write(", Pemandu: " + namaPemandu);
+            writer.newLine(); // Tambahkan baris baru
+            writer.write("====================================");
+            writer.newLine(); // Baris kosong untuk memisahkan entri
+            System.out.println("Data pengunjung berhasil disimpan ke file!");
         } catch (IOException e) {
             System.out.println("Error saving visitor data: " + e.getMessage());
         }
